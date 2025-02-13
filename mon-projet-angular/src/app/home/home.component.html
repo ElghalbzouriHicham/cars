@@ -1,0 +1,24 @@
+<div class="home-container">
+  <h1>Bienvenue à la Gestion des Locations de Voitures</h1>
+  <p>Gérez vos réservations et véhicules en toute simplicité.</p>
+  <button class="btn-login" (click)="openLoginModal()">Connexion Administrateur</button>
+</div>
+
+<!-- Modal de connexion -->
+<div class="modal" *ngIf="isLoginModalOpen" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>Connexion Administrateur</h2>
+    <form (ngSubmit)="login(credentials)">
+      <label for="username">Nom d'utilisateur</label>
+      <input type="text" id="username" name="email" [(ngModel)]="credentials.email" placeholder="Entrez votre nom d'utilisateur">
+      
+      <label for="password">Mot de passe</label>
+      <input type="password" id="password" name="password" [(ngModel)]="credentials.password" placeholder="Entrez votre mot de passe">
+      
+      <button type="submit">Se connecter</button>
+    </form>
+    <!-- Afficher un message d'erreur -->
+    <p *ngIf="loginErrorMessage" class="error-message">{{ loginErrorMessage }}</p>
+  </div>
+</div>

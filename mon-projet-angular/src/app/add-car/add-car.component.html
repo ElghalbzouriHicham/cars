@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Cars</title>
+
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li><button class="link-button" (click)="goToDash()">Up Comming</button></li>
+        <li><button class="link-button" (click)="goToCar()">Cars</button></li>
+        <li><button class="link-button" (click)="goToMaintenance()">Maintenance</button></li>
+        <li><button class="link-button" (click)="goToCalendrier()">Calendar</button></li>
+        <li><button class="link-button" (click)="goToHistory()">History</button></li>
+        <li><button class="link-button" (click)="goToReport()">Reports</button></li>
+        <li><button class="link-button" (click)="logout()">Logout</button></li>
+      </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <h1>Vehicle Management</h1>
+      
+      <!-- Existing Cars Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Plate Number</th>
+            <th>Year</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let car of cars">
+            <td>{{ car.brand }}</td>
+            <td>{{ car.model }}</td>
+            <td>{{ car.plate_number }}</td>
+            <td>{{ car.year }}</td>
+            <td>{{ car.status }}</td>
+            <td>
+              <button class="edit-btn" (click)="openUpdateModal(car)">Edit</button>&nbsp;
+              <button class="delete-btn" (click)="deleteCar(car.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Add New Car Button -->
+      <button class="add-btn" (click)="openModal()">Add New Car</button>
+
+      <!-- Modal -->
+      <div *ngIf="isModalOpen" class="modal-overlay">
+        <div class="modal-content">
+          <span class="close" (click)="closeModal()">&times;</span>
+          <h2>{{ isUpdating ? 'Update Car' : 'Add New Car' }}</h2>
+          
+          <form (ngSubmit)="isUpdating ? updateCar() : addCar()">
+            <div class="form-group">
+              <label>Plate Number:</label>
+              <input type="text" [(ngModel)]="carData.plate_number" name="plate_number" required>
+            </div>
+
+            <div class="form-group">
+              <label>Brand:</label>
+              <input type="text" [(ngModel)]="carData.brand" name="brand" required>
+            </div>
+
+            <div class="form-group">
+              <label>Model:</label>
+              <input type="text" [(ngModel)]="carData.model" name="model" required>
+            </div>
+
+            <div class="form-group">
+              <label>Year:</label>
+              <input type="number" [(ngModel)]="carData.year" name="year" required>
+            </div>
+
+            <div class="form-group">
+              <label>Mileage:</label>
+              <input type="number" [(ngModel)]="carData.mileage" name="mileage">
+            </div>
+
+            <button type="submit" class="submit-btn">
+              {{ isUpdating ? 'Update' : 'Add' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

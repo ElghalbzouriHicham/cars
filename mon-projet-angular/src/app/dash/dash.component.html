@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+</head>
+<body>
+  <div class="dashboard">
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li><button class="link-button" (click)="goToDash()">Up Comming</button></li>
+        <li><button class="link-button" (click)="goToCar()">Cars</button></li>
+        <li><button class="link-button" (click)="goToMaintenance()">Maintenance</button></li>
+        <li><button class="link-button" (click)="goToCalendrier()">Calendar</button></li>
+        <li><button class="link-button" (click)="goToHistory()">History</button></li>
+        <li><button class="link-button" (click)="goToReport()">Reports</button></li>
+        <li><button class="link-button" (click)="logout()">Logout</button></li>
+
+      </ul>
+    </div>
+    <div class="content">
+        <h1>Maintenance Up comming </h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Plate Number</th>
+              <th>Type</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let vehicle of upcomingMaintenances">
+              <td>{{ vehicle.brand }}</td>
+              <td>{{ vehicle.plate_number }}</td>
+              <td>{{ vehicle.maintenance_type }}</td>
+              <td>{{ vehicle.next_due_date }}</td>
+              <td>
+                <button class="edit-btn" (click)="editMaintenance(vehicle.maintenance_id)">Edit</button>&nbsp;
+                <button class="delete-btn" (click)="deleteMaintenance(vehicle.maintenance_id)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</body>
+</html>

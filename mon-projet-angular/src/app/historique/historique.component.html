@@ -1,0 +1,48 @@
+<div class="dashboard">
+    <div class="sidebar">
+      <h2>Admin Dashboard</h2>
+      <ul>
+        <li><button class="link-button" (click)="goToDash()">Up Comming</button></li>
+        <li><button class="link-button" (click)="goToCar()">cars</button></li>
+        <li><button class="link-button" (click)="goToMaintenance()">Maintenance</button></li>
+        <li><button class="link-button" (click)="goToCalendrier()">Calendar</button></li>
+        <li><button class="link-button" (click)="goToHistory()">History</button></li>
+        <li><button class="link-button" (click)="goToReport()">Reports</button></li>
+        <li><button class="link-button" (click)="logout()">Logout</button></li>
+
+      </ul>
+    </div>
+  
+    <div class="content">
+      <h1>Maintenance History</h1>
+      
+      <div class="filter-section">
+        <select (change)="onCarSelect($event)" class="filter-select">
+          <option value="">All vehicles</option>
+          <option *ngFor="let car of cars" [value]="car.id">
+            {{ car.brand }} {{ car.model }} ({{ car.plate_number }})
+          </option>
+        </select>
+      </div>
+  
+      <div class="maintenance-history">
+        <div *ngFor="let car of groupedMaintenances" class="car-section">
+          <h2>{{ car.brand }} {{ car.model }} ({{ car.plate_number }})</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Maintenance Type</th>
+                <th>Last Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let maintenance of car.maintenances">
+                <td>{{ maintenance.maintenance_type }}</td>
+                <td>{{ maintenance.next_due_date | date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
